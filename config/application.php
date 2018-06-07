@@ -21,6 +21,12 @@ if (file_exists($root_dir . '/.env')) {
 }
 
 /**
+ * Set ssl support for content uploads 
+ * Default: off
+ */
+$webroot_host = ( getenv('WP_SSL') == 'on' ? 'https://' : 'http://') . $_SERVER['HTTP_HOST'];
+
+/**
  * Set up our global environment constant and load its config first
  * Default: production
  */
@@ -43,7 +49,7 @@ define('WP_SITEURL', env('WP_SITEURL'));
  */
 define('CONTENT_DIR', '/app');
 define('WP_CONTENT_DIR', $webroot_dir . CONTENT_DIR);
-define('WP_CONTENT_URL', WP_HOME . CONTENT_DIR);
+define('WP_CONTENT_URL', $webroot_host . CONTENT_DIR);
 
 /**
  * DB settings
